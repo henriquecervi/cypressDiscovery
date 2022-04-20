@@ -24,6 +24,7 @@ describe('Cadastro', () => {
         // funciona
         //cy.get('.delivery-method li [alt="Bicicleta"]').click()
 
+        // other form
         cy.contains('.delivery-method li', entregador.metodo_entrega).click()
 
         cy.get('.dropzone input[type="file"]').attachFile()
