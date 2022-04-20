@@ -27,7 +27,11 @@ describe('Cadastro', () => {
         // other form
         cy.contains('.delivery-method li', entregador.metodo_entrega).click()
 
-        cy.get('.dropzone input[type="file"]').attachFile()
+        cy.get('.dropzone input[type="file"]').attachFile('/images/cnh-digital.jpg')
+
+        cy.get('button.button-success').click()
+
+        cy.get('#swal2-title').should('have.text', 'Aí Sim...')
 
 
 
