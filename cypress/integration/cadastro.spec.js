@@ -5,8 +5,8 @@ describe('Cadastro', () => {
         cy.get('[href="/deliver"]').click()
         cy.get('#page-deliver form h1').should('have.text','Cadastre-se para  fazer entregas')
 
-        let entregador = {
-            metodo_entrega: 'Bicicleta'
+        let deliver = {
+            delivery_method: 'Bicicleta'
         }
 
         cy.get('[placeholder="Nome completo"]').type('TesteQA')
@@ -25,7 +25,7 @@ describe('Cadastro', () => {
         //cy.get('.delivery-method li [alt="Bicicleta"]').click()
 
         // other form
-        cy.contains('.delivery-method li', entregador.metodo_entrega).click()
+        cy.contains('.delivery-method li', deliver.delivery_method).click()
 
         cy.get('.dropzone input[type="file"]').attachFile('/images/cnh-digital.jpg')
 
