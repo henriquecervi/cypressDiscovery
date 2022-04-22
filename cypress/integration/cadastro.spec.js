@@ -1,39 +1,33 @@
+import SignupPage from '../pages/SignupPage'
+
 describe('Cadastro', () => {
     it('Seja um entregador', () => {
-        cy.viewport(1440, 900)
-        cy.visit('https://buger-eats.vercel.app')
-        cy.get('[href="/deliver"]').click()
-        cy.get('#page-deliver form h1').should('have.text','Cadastre-se para  fazer entregas')
-
+       
         let deliver = {
-            delivery_method: 'Bicicleta'
-        }
+            name: 'TesteQA',
+            cpf: '12345678900',
+            email: 'test@test.com',
+            whatsapp: '11912345678',
+            address: {
+                postalcode: '04849529',
+                street: 'Rua 13 de Maio',
+                number: '100',
+                details: 'Test',
+                district: 'Cantinho do Céu',
+                city_state: 'São Paulo/SP'
+            },
+            delivery_method: 'Bicicleta',
+            cnh: '/images/cnh-digital.jpg'
+        }       
 
-        cy.get('[placeholder="Nome completo"]').type('TesteQA')
-        cy.get('input[name="cpf"]').type('12345678900')
-        cy.get('input[name="email"]').type('test@test.com')
-        cy.get('input[name="whatsapp"]').type('11912345678')
-        cy.get('[placeholder="CEP"]').type('04849529')
-        cy.get('input[type="button"][value="Buscar CEP"]').click()
-        cy.get('input[name="address"]').should('have.value', 'Rua 13 de Maio')
-        cy.get('input[name="address-number"]').type('100')
-        cy.get('input[name="address-details"]').type('Test')
-        cy.get('input[name="district"]').should('have.value', 'Cantinho do Céu')
-        cy.get('input[name="city-uf"]').should('have.value', 'São Paulo/SP')
+        var signup = new SignupPage()
+        const expectedmessage = 'Aí Sim...'
 
-        // funciona
-        //cy.get('.delivery-method li [alt="Bicicleta"]').click()
-
-        // other form
-        cy.contains('.delivery-method li', deliver.delivery_method).click()
-
-        cy.get('.dropzone input[type="file"]').attachFile('/images/cnh-digital.jpg')
-
-        cy.get('button.button-success').click()
-
-        cy.get('#swal2-title').should('have.text', 'Aí Sim...')
-
-
+        signup.go()
+        signup.fillForm(deliver)
+        signup.submit()
+        signup.modalContentShouldBe(expectedmessage)
+        
 
     })
 })
