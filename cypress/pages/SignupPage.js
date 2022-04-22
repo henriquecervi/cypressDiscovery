@@ -3,7 +3,7 @@ class SignupPage {
 
     go () {        
         cy.visit('/')
-        
+
         cy.get('[href="/deliver"]').click()
         cy.get('#page-deliver form h1').should('have.text','Cadastre-se para  fazer entregas')
     }
@@ -13,6 +13,7 @@ class SignupPage {
         cy.get('input[name="cpf"]').type(deliver.cpf)
         cy.get('input[name="email"]').type(deliver.email)
         cy.get('input[name="whatsapp"]').type(deliver.whatsapp)
+
         cy.get('[placeholder="CEP"]').type(deliver.address.postalcode)
         cy.get('input[type="button"][value="Buscar CEP"]').click()
         cy.get('input[name="address"]').should('have.value', deliver.address.street)
@@ -39,4 +40,4 @@ class SignupPage {
     }
 }
 
-export default SignupPage;
+export default new SignupPage;
