@@ -38,6 +38,10 @@ class SignupPage {
     modalContentShouldBe(expectedMessage) {
         cy.get('#swal2-title').should('have.text', expectedMessage)
     }
+
+    alertMessageShouldBe(expectedMessage) {
+        cy.get('.alert-error').should('have.text', expectedMessage )
+    }
 }
 
 export default new SignupPage;
