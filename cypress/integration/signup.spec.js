@@ -2,7 +2,7 @@ import signup from '../pages/SignupPage'
 import SignupFactory from '../factories/SignupFactory'
 import SignupPage from '../pages/SignupPage'
 
-describe('Signup', () => {
+describe('Signup page', () => {
 
     //to use fixture we need "function" in case of arrowFunction
     // beforeEach(function () {
