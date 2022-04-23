@@ -4,7 +4,8 @@
   "description": "Estudo Cypress Front",
   "main": "index.js",
   "scripts": {
-    "test": "npx cypress open"
+    "test": "npx cypress open",
+    "test:run": "npx cypress run"
   },
   "author": "Henrique Cervi",
   "license": "MIT",
