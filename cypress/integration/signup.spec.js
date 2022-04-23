@@ -1,5 +1,6 @@
 import signup from '../pages/SignupPage'
 import SignupFactory from '../factories/SignupFactory'
+import SignupPage from '../pages/SignupPage'
 
 describe('Signup', () => {
 
@@ -9,8 +10,8 @@ describe('Signup', () => {
     //         this.deliver = d
     //     })
     // })
-    it('User should deliver', function () {     
-        
+    it('User should deliver', function () {
+
         var deliver = SignupFactory.deliver()
 
         signup.go()
@@ -31,8 +32,7 @@ describe('Signup', () => {
         signup.alertMessageShouldBe('Oops! Email com formato inválido.')
     })
 
-    it.only('Required fields', () => {
-
+    it.skip('Required fields', () => {
         signup.go()
         signup.submit()
         signup.alertMessageShouldBe('É necessário informar o nome')
@@ -42,6 +42,29 @@ describe('Signup', () => {
         signup.alertMessageShouldBe('É necessário informar o número do endereço')
         signup.alertMessageShouldBe('Selecione o método de entrega')
         signup.alertMessageShouldBe('Adicione uma foto da sua CNH')
-        
+
     });
+
+    context('Required fields with context', function () {
+        const messages = [
+            { field: 'name', output: 'É necessário informar o nome' },
+            { field: 'cpf', output: 'É necessário informar o CPF' },
+            { field: 'email', output: 'É necessário informar o email' },
+            { field: 'cep', output: 'É necessário informar o CEP' },
+            { field: 'number', output: 'É necessário informar o número do endereço' },
+            { field: 'delivery_method', output: 'Selecione o método de entrega' },
+            { field: 'cnh', output: 'Adicione uma foto da sua CNH' }
+        ]
+
+        before(function() {
+            signup.go()
+            signup.submit()
+        })
+
+        messages.forEach(function(msg){
+            it(`${msg.field} is required`, function(){
+                SignupPage.alertMessageShouldBe(msg.output)
+            })
+        })
+    })
 })
